@@ -1,8 +1,7 @@
-package com.toto.blog.dao;
+package com.toto.blog.entity;
 
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

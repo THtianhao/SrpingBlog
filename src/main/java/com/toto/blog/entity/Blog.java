@@ -1,4 +1,4 @@
-package com.toto.blog.dao;
+package com.toto.blog.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

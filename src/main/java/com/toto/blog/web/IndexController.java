@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
     @GetMapping("/")
     public String index() {
-        int i = 9/0;
+//        int i = 9/0;
         String blog = null;
 //        if (blog == null) {
 //            throw new NotFoundException("博客不存在");

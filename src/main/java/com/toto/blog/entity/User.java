@@ -1,4 +1,4 @@
-package com.toto.blog.dao;
+package com.toto.blog.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "t_name")
+@Table(name = "t_user")
 public class User {
     @Id
     @GeneratedValue
     private long id;
     private String nickName;
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private String avatar;
@@ -45,11 +45,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {
