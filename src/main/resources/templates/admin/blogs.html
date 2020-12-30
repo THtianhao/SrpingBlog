@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <!--    浏览效果的设置 缩放比例不缩放-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>管理后台</title>
+    <title>博客登录</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/me.css">
 </head>
-<body>
 <!--导航-->
 <!--ui是sematic的组件代码-->
 <!--inverted 是反色的意思-->
-<nav class="ui inverted attached segment m-padded-td-min m-shadow-small">
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> 管理后台</h2>
@@ -27,7 +26,7 @@
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a href="#" class="item">注销</a>
+                        <a href="#" th:href="@{/admin/loginout}" class="item">注销</a>
                     </div>
                 </div>
             </div>
@@ -46,6 +45,8 @@
         </div>
     </div>
 </div>
+
+<body>
 <div class="m-container-small m-padded-td-big">
     <!--    container可以好的适应移动端-->
     <div class="ui container">
@@ -119,7 +120,7 @@
 <br>
 
 
-<footer class="ui inverted vertical segment m-padded-td-massive">
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-td-massive">
     <div class="ui center aligned container">
         <!--        grid分成16份-->
         <div class="ui inverted divided stackable grid">
@@ -156,10 +157,12 @@
             toto</p>
     </div>
 </footer>
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 <!--jquery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--semantic-ui-->
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {
