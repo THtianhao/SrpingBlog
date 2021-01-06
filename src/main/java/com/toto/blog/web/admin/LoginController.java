@@ -6,7 +6,6 @@ import com.toto.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,7 +40,7 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/loginout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:/admin";

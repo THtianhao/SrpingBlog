@@ -1,5 +1,6 @@
 package com.toto.blog.web.admin;
 
+import com.toto.blog.entity.Type;
 import com.toto.blog.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,8 +26,19 @@ public class TypeController {
         return "admin/types";
     }
 
-    @GetMapping("/type/input")
+    @GetMapping("/types/input")
     public String input() {
-        return "admin/type_input";
+        return "admin/types_input";
+    }
+
+    @PostMapping("/types")
+    public String post(Type type) {
+        Type type1 = typeService.saveType(type);
+        if (type1 == null) {
+            //
+        } else {
+            //
+        }
+        return "redirect:/admin/types";
     }
 }

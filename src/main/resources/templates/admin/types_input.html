@@ -53,7 +53,7 @@
 
 <div class="m-container-small m-padded-td-big">
     <div class="ui container">
-        <form action="#" method="post" class="ui form">
+        <form action="#" method="post" th:action="@{admin/types}" class="ui form">
             <!--首图引用地址-->
             <div class="field">
                 <div class="ui left labeled input">
@@ -67,7 +67,7 @@
             <div class="ui right aligned container">
                 <!--                type不指定默认type是submit-->
                 <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
-                <button class="ui teal button">提交</button>
+                <button class="ui teal submit button">提交</button>
             </div>
         </form>
     </div>
