@@ -60,8 +60,8 @@
             </thead>
             <tbody>
             <tr th:each="type,iterStat : ${page.content}">
-                <td th:text="${iterSata.count}">1</td>
-                <td th:text="${type.name}}">清单</td>
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${type.name}">清单</td>
                 <td>
                     <a href="#" th:href="@{/admin/types/{id}/input{id=${type.id}}}"
                        class="ui mini basic teal button">操作</a>

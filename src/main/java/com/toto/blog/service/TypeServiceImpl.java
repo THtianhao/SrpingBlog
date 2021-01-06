@@ -19,7 +19,8 @@ public class TypeServiceImpl implements TypeService {
     @Transactional
     @Override
     public Type saveType(Type type) {
-        return null;
+        Type t = typeRepository.save(type);
+        return t;
     }
 
     @Transactional
