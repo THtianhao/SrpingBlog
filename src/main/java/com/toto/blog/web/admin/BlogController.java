@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class BlogController {
     @GetMapping("/blogs")
-    public String list(){
-        return "/admin/blogs";
+    public String list() {
+        return "admin/blogs";
+    }
+
+    @GetMapping("/blogs/input")
+    public String blogs() {
+        return "admin/blog_input";
     }
 
 
