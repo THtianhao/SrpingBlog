@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <!--    浏览效果的设置 缩放比例不缩放-->
@@ -42,8 +42,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="teal active item">列表</a>
+            <a href="#" th:href="@{/admin/types/input}" class="teal active item">新增</a>
+            <a href="#" th:href="@{/admin/types}" class="item">列表</a>
         </div>
     </div>
 </div>
@@ -53,16 +53,25 @@
 
 <div class="m-container-small m-padded-td-big">
     <div class="ui container">
-        <form action="#" method="post" th:action="@{/admin/types}" class="ui form">
+        <form action="#" method="post" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/{id}(id = *{id})}"
+              th:object="${type}" class="ui form">
+            <input type="hidden" name="id" th:value="*{id}">
             <!--首图引用地址-->
-            <div class="field">
+            <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name" placeholder="分类名称">
+                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
                 </div>
             </div>
             <!--            错误提示-->
+            <!--/*/
             <div class="ui error message"></div>
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <i class="close icon"></i>
+                <div class="header">校验失败</div>
+                <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>
+            /*/-->
             <!--            三个按钮-->
             <div class="ui right aligned container">
                 <!--                type不指定默认type是submit-->
@@ -134,10 +143,10 @@
     $('.ui.form').form({
         fields: {
             title: {
-                identifier: 'title',
+                identifier: 'name11',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题：请输入博客标题'
+                    prompt: '请输入标签名称'
                 }]
             }
         }

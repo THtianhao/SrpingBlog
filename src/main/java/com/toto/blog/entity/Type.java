@@ -1,6 +1,9 @@
 package com.toto.blog.entity;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,8 @@ public class Type {
     @Id
     @GeneratedValue
     private long id;
+
+    @NotBlank(message = "分类名称不能为空")
     private String name;
 
     @OneToMany(mappedBy = "type")
