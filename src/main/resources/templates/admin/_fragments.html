@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <!--    浏览效果的设置 缩放比例不缩放-->
@@ -19,13 +19,19 @@
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> 管理后台</h2>
-            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active' "><i class="home icon"></i>博客</a>
-            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active' "><i class="idea icon"></i>分类</a>
-            <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i class="tags icon"></i>标签</a>
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide"
+               th:classappend="${n==1} ? 'active' "><i class="home icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide"
+               th:classappend="${n==2} ? 'active' "><i class="idea icon"></i>分类</a>
+            <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i
+                    class="tags icon"></i>标签</a>
             <div class="right m-item menu m-mobile-hide">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="https://picsum.photos/id/1/800/400?image=#1000" class="ui avatar image">taylor
+                        <img src="https://picsum.photos/id/1/800/400?image=#1000"
+                             th:src="@{${session.user.avatar}}"
+                             class="ui avatar image">
+                        <span th:text="${session.user.nickName}"></span>
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -50,7 +56,8 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/wechat.jpg" th:src="@{/image/wechat.jpg}" class="ui rounded image" alt="" style="width: 100px">
+                        <img src="../static/image/wechat.jpg" th:src="@{/image/wechat.jpg}" class="ui rounded image"
+                             alt="" style="width: 100px">
                     </div>
                 </div>
             </div>
