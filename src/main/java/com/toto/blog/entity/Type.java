@@ -12,7 +12,7 @@ import java.util.List;
 public class Type {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @NotBlank(message = "分类名称不能为空")
     private String name;
@@ -23,19 +23,11 @@ public class Type {
     public Type() {
     }
 
-    public List<Blog> getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,4 +38,13 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
+    }
+
 }

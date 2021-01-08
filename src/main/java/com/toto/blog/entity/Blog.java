@@ -11,16 +11,16 @@ import java.util.List;
 public class Blog {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     private String title;
     private String content;
     private String flag;
     private Integer views;
     private boolean isAppreciationEnable;
-    private boolean isShareStatementEnbale;
+    private boolean isShareStatementEnable;
     private boolean isCommentEnable;
     private boolean isPublish;
-    private boolean isRecomment;
+    private boolean isRecommend;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,11 +49,11 @@ public class Blog {
         this.type = type;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,14 +97,6 @@ public class Blog {
         isAppreciationEnable = appreciationEnable;
     }
 
-    public boolean isShareStatementEnbale() {
-        return isShareStatementEnbale;
-    }
-
-    public void setShareStatementEnbale(boolean shareStatementEnbale) {
-        isShareStatementEnbale = shareStatementEnbale;
-    }
-
     public boolean isCommentEnable() {
         return isCommentEnable;
     }
@@ -121,13 +113,6 @@ public class Blog {
         isPublish = publish;
     }
 
-    public boolean isRecomment() {
-        return isRecomment;
-    }
-
-    public void setRecomment(boolean recomment) {
-        isRecomment = recomment;
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -167,5 +152,21 @@ public class Blog {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public boolean isShareStatementEnable() {
+        return isShareStatementEnable;
+    }
+
+    public void setShareStatementEnable(boolean shareStatementEnable) {
+        isShareStatementEnable = shareStatementEnable;
+    }
+
+    public boolean isRecommend() {
+        return isRecommend;
+    }
+
+    public void setRecommend(boolean recommend) {
+        isRecommend = recommend;
     }
 }

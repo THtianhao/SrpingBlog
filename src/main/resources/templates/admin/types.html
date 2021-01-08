@@ -69,10 +69,8 @@
                 <td th:text="${iterStat.count}">1</td>
                 <td th:text="${type.name}">清单</td>
                 <td>
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}"
-                       class="ui mini basic teal button">操作</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"
-                       class="ui mini basic red button">删除</a>
+                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini basic teal button">操作</a>
+                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini basic red button">删除</a>
                 </td>
             </tr>
             </tbody>
