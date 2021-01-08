@@ -5,19 +5,21 @@
     <!--    浏览效果的设置 缩放比例不缩放-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>分类管理</title>
+    <title>标签新增</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
     <link rel="stylesheet" href="../../static/css/me.css">
 </head>
+<body>
 <!--导航-->
 <!--ui是sematic的组件代码-->
 <!--inverted 是反色的意思-->
-<nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
+<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> 管理后台</h2>
             <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i> 分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <div class="right m-item menu m-mobile-hide">
                 <div class="ui dropdown item">
@@ -26,7 +28,7 @@
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                        <a href="#" class="item">注销</a>
                     </div>
                 </div>
             </div>
@@ -40,56 +42,48 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" th:href="@{/admin/types/input}" class="item">新增</a>
-            <a href="#" th:href="@{/admin/types}" class="teal active item">列表</a>
+            <a href="#" th:href="@{/admin/tags/input}" class="teal active item">新增</a>
+            <a href="#" th:href="@{/admin/tags}" class="item">列表</a>
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
 
-<body>
 <div class="m-container-small m-padded-td-big">
-    <!--    container可以好的适应移动端-->
     <div class="ui container">
-        <div class="ui mini success message"
-             th:unless="${#strings.isEmpty(message)}">
-            <i class="close icon"></i>
-            <p th:text="${message}">操作成功</p>
-        </div>
-
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>名称</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="type,iterStat : ${page.content}">
-                <td th:text="${iterStat.count}">1</td>
-                <td th:text="${type.name}">清单</td>
-                <td>
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}"
-                       class="ui mini basic teal button">操作</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"
-                       class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="6">
-                    <div class="ui mini floated pagination menu"  th:if="${page.totalPages} > 1">
-                        <a href="#" th:href="@{/admin/types(page=${page.number - 1})}" class="item" th:unless="${page.isFirst()}">上一页</a>
-                        <a href="#" th:href="@{/admin/types(page=${page.number + 1})}" class="item" th:unless="${page.isLast()}">下一页</a>
-                    </div>
-                    <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+        <form action="#" method="post" th:action="*{id}==0 ? @{/admin/tags} : @{/admin/tags/{id}(id = *{id})}"
+              th:object="${tag}" class="ui form">
+            <input type="hidden" name="id" th:value="*{id}">
+            <!--首图引用地址-->
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
+                </div>
+            </div>
+            <!--            错误提示-->
+            <!--/*/
+            <div class="ui error message"></div>
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <i class="close icon"></i>
+                <div class="header">校验失败</div>
+                <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>
+            /*/-->
+            <!--            三个按钮-->
+            <div class="ui right aligned container">
+                <!--                type不指定默认type是submit-->
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal submit button">提交</button>
+            </div>
+        </form>
     </div>
 </div>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -138,7 +132,6 @@
 <!--semantic-ui-->
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <!--/*/</th:block>/*/-->
-
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
@@ -146,12 +139,18 @@
     $('.ui.dropdown').dropdown({
         on: 'hover'
     });
-    $('.message .close')
-        .on('click', function() {
-            $(this)
-                .closest('.message')
-                .transition('fade');
-        });
+    // 非空验证
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入标签名称'
+                }]
+            }
+        }
+    })
 </script>
 </body>
 </html>

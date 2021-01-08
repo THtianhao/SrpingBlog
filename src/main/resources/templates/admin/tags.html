@@ -5,14 +5,14 @@
     <!--    浏览效果的设置 缩放比例不缩放-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>分类管理</title>
+    <title>标签管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <!--导航-->
 <!--ui是sematic的组件代码-->
 <!--inverted 是反色的意思-->
-<nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
+<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> 管理后台</h2>
@@ -40,8 +40,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" th:href="@{/admin/types/input}" class="item">新增</a>
-            <a href="#" th:href="@{/admin/types}" class="teal active item">列表</a>
+            <a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
+            <a href="#" th:href="@{/admin/tags}" class="teal active item">列表</a>
         </div>
     </div>
 </div>
@@ -65,13 +65,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="type,iterStat : ${page.content}">
+            <tr th:each="tag,iterStat : ${page.content}">
                 <td th:text="${iterStat.count}">1</td>
-                <td th:text="${type.name}">清单</td>
+                <td th:text="${tag.name}">清单</td>
                 <td>
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}"
+                    <a href="#" th:href="@{/admin/tags/{id}/input(id=${tag.id})}"
                        class="ui mini basic teal button">操作</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"
+                    <a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}"
                        class="ui mini basic red button">删除</a>
                 </td>
             </tr>
@@ -80,10 +80,10 @@
             <tr>
                 <th colspan="6">
                     <div class="ui mini floated pagination menu"  th:if="${page.totalPages} > 1">
-                        <a href="#" th:href="@{/admin/types(page=${page.number - 1})}" class="item" th:unless="${page.isFirst()}">上一页</a>
-                        <a href="#" th:href="@{/admin/types(page=${page.number + 1})}" class="item" th:unless="${page.isLast()}">下一页</a>
+                        <a href="#" th:href="@{/admin/tags(page=${page.number - 1})}" class="item" th:unless="${page.isFirst()}">上一页</a>
+                        <a href="#" th:href="@{/admin/tags(page=${page.number + 1})}" class="item" th:unless="${page.isLast()}">下一页</a>
                     </div>
-                    <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
+                    <a href="#" th:href="@{/admin/tags/input}" class="ui mini right floated teal basic button">新增</a>
                 </th>
             </tr>
             </tfoot>

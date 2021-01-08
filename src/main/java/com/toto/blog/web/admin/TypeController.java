@@ -24,6 +24,12 @@ public class TypeController {
     @Autowired
     private TypeService typeService;
 
+    /**
+     * 进入页面，展示分页
+     * @param pageable
+     * @param model
+     * @return
+     */
     @GetMapping("/types")
     public String types(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC)
                                 Pageable pageable, Model model) {
@@ -31,17 +37,25 @@ public class TypeController {
         return "admin/types";
     }
 
+    /**
+     * 新增数据
+     * @param model
+     * @return
+     */
+
     @GetMapping("/types/input")
     public String input(Model model) {
         model.addAttribute("type", new Type());
         return "admin/types_input";
     }
 
-    @GetMapping("types/{id}/input")
-    public String editInput(@PathVariable Long id, Model model) {
-        model.addAttribute("type", typeService.getType(id));
-        return "admin/types_input";
-    }
+    /**
+     * 新增数据提交
+     * @param type
+     * @param bindingResult
+     * @param redirectAttributes
+     * @return
+     */
 
     @PostMapping("/types")
     public String post(@Valid Type type, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -61,6 +75,27 @@ public class TypeController {
         return "redirect:/admin/types";
     }
 
+    /**
+     * 修改数据
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("types/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        model.addAttribute("type", typeService.getType(id));
+        return "admin/types_input";
+    }
+
+
+    /**
+     * 修改数据提交
+     * @param type
+     * @param bindingResult
+     * @param id
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping("/types/{id}")
     public String editpost(@Valid Type type, BindingResult bindingResult, @PathVariable Long id, RedirectAttributes redirectAttributes) {
         Type type1 = typeService.getTypeByName(type.getName());
@@ -70,7 +105,7 @@ public class TypeController {
         if (bindingResult.hasErrors()) {
             return "admin/types_input";
         }
-        Type type2 = typeService.saveType(type);
+        Type type2 = typeService.updateType(id,type);
         if (type2 == null) {
             redirectAttributes.addFlashAttribute("message", "更新失败");
         } else {
@@ -79,6 +114,12 @@ public class TypeController {
         return "redirect:/admin/types";
     }
 
+    /**
+     * 删除数据
+     * @param id
+     * @param redirectAttributes
+     * @return
+     */
     @GetMapping("types/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         typeService.deleteType(id);

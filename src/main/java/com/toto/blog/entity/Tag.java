@@ -1,6 +1,7 @@
 package com.toto.blog.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class Tag {
     @Id
     @GeneratedValue
     private long id;
+
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     @ManyToMany(mappedBy = "tags")
