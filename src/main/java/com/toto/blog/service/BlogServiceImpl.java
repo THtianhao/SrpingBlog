@@ -42,7 +42,7 @@ public class BlogServiceImpl implements BlogService {
                     predicateList.add(criteriaBuilder.equal(root.<String>get("type").get("id"), blog.getTypeId()));
                 }
                 if (blog.isRecommend()) {
-                    predicateList.add(criteriaBuilder.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
+                    predicateList.add(criteriaBuilder.equal(root.<Boolean>get("isRecommend"), blog.isRecommend()));
                 }
                 query.where(predicateList.toArray(new Predicate[predicateList.size()]));
                 return null;
