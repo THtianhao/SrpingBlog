@@ -20,11 +20,11 @@ public class Blog {
     private String firstPicture;
     private String flag;
     private Integer views = 0;
-    private boolean isAppreciationEnable;
-    private boolean isShareStatementEnable;
-    private boolean isCommentEnable;
-    private boolean isPublish;
-    private boolean isRecommend;
+    private boolean appreciationEnable;
+    private boolean shareStatementEnable;
+    private boolean commentEnable;
+    private boolean published;
+    private boolean recommend;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
@@ -45,6 +45,23 @@ public class Blog {
     @Transient
     private String tagIds;
 
+    public void init() {
+        this.tagIds = tagsToIds(this.getTags());
+    }
+
+    private String tagsToIds(List<Tag> tags) {
+        if (!tags.isEmpty()) {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < tags.size(); i++) {
+                buffer.append(tags.get(i).getId()).append(",");
+            }
+            if (buffer.length() > 0) {
+                buffer.deleteCharAt(buffer.length() - 1);
+            }
+            return buffer.toString();
+        }
+        return tagIds;
+    }
 
     public Blog() {
     }
@@ -105,29 +122,7 @@ public class Blog {
         this.views = views;
     }
 
-    public boolean isAppreciationEnable() {
-        return isAppreciationEnable;
-    }
 
-    public void setAppreciationEnable(boolean appreciationEnable) {
-        isAppreciationEnable = appreciationEnable;
-    }
-
-    public boolean isCommentEnable() {
-        return isCommentEnable;
-    }
-
-    public void setCommentEnable(boolean commentEnable) {
-        isCommentEnable = commentEnable;
-    }
-
-    public boolean isPublish() {
-        return isPublish;
-    }
-
-    public void setPublish(boolean publish) {
-        isPublish = publish;
-    }
 
 
     public Date getCreateTime() {
@@ -170,20 +165,44 @@ public class Blog {
         this.comments = comments;
     }
 
+    public boolean isAppreciationEnable() {
+        return appreciationEnable;
+    }
+
+    public void setAppreciationEnable(boolean appreciationEnable) {
+        this.appreciationEnable = appreciationEnable;
+    }
+
     public boolean isShareStatementEnable() {
-        return isShareStatementEnable;
+        return shareStatementEnable;
     }
 
     public void setShareStatementEnable(boolean shareStatementEnable) {
-        isShareStatementEnable = shareStatementEnable;
+        this.shareStatementEnable = shareStatementEnable;
+    }
+
+    public boolean isCommentEnable() {
+        return commentEnable;
+    }
+
+    public void setCommentEnable(boolean commentEnable) {
+        this.commentEnable = commentEnable;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public boolean isRecommend() {
-        return isRecommend;
+        return recommend;
     }
 
     public void setRecommend(boolean recommend) {
-        isRecommend = recommend;
+        this.recommend = recommend;
     }
 
     public String getTagIds() {

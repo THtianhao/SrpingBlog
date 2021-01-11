@@ -40,8 +40,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="teal active item">列表</a>
+            <a href="#" th:href="@{/admin/blogs/input}" class=" item">发布</a>
+            <a href="#" th:href="@{/admin/blogs}" class="teal active item">列表</a>
         </div>
     </div>
 </div>
@@ -93,6 +93,7 @@
                     <th>标题</th>
                     <th>类型</th>
                     <th>推荐</th>
+                    <th>发布状态</th>
                     <th>更新时间</th>
                     <th>操作</th>
                 </tr>
@@ -103,6 +104,7 @@
                     <td th:text="${blog.title}">清单</td>
                     <td th:text="${blog.type.name}">android</td>
                     <td th:text="${blog.recommend} ? '是':'否' ">认知提升</td>
+                    <td th:text="${blog.published} ? '发布':'草稿' ">认知提升</td>
                     <td th:text="${blog.updateTime}">2017-10-2</td>
                     <td>
                         <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
