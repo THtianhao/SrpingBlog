@@ -13,9 +13,13 @@ public class Blog {
     @GeneratedValue
     private Long id;
     private String title;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String content;
+    private String firstPicture;
     private String flag;
-    private Integer views;
+    private Integer views = 0;
     private boolean isAppreciationEnable;
     private boolean isShareStatementEnable;
     private boolean isCommentEnable;
@@ -37,6 +41,10 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
+
+    @Transient
+    private String tagIds;
+
 
     public Blog() {
     }
@@ -71,6 +79,14 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getFirstPicture() {
+        return firstPicture;
+    }
+
+    public void setFirstPicture(String firstPicture) {
+        this.firstPicture = firstPicture;
     }
 
     public String getFlag() {
@@ -168,5 +184,13 @@ public class Blog {
 
     public void setRecommend(boolean recommend) {
         isRecommend = recommend;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 }

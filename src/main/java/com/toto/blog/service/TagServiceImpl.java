@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -39,6 +42,28 @@ public class TagServiceImpl implements TagService {
     @Override
     public Page<Tag> listTag(Pageable page) {
         return tagRepository.findAll(page);
+    }
+
+    @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    private List<Long> stringCoverList(String ids) {
+        List<Long> list = new ArrayList<Long>();
+        if (ids != null && !ids.isEmpty()) {
+            String[] idarray = ids.split(",");
+            for (int i = 0; i < idarray.length; i++) {
+                list.add(Long.valueOf(idarray[i]));
+            }
+            return list;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        return tagRepository.findAllById(stringCoverList(ids));
     }
 
     @Transactional
