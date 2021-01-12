@@ -14,6 +14,6 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     List<Blog> findTop(Pageable pageable);
 
 
-    @Query("from Blog where title like ?1 or content like ?1")
+    @Query("select b from Blog b where b.title  like ?1 or b.content like ?1")
     Page<Blog> findByQuery(String query, Pageable pageable);
 }

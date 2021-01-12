@@ -8,30 +8,30 @@
     <title th:replace="${title}">博客详情</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>-->
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{css/typo.css}">
-    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{css/animate.css}">
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{lib/prism/prism.css}">
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{lib/tocbot/tocbot.css}">
-    <link rel="stylesheet" href="../static/css/me.css" th:href="@{css/me.css}">
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 
 <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> Blog</h2>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active' "><i class="home icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active' "><i class="idea icon"></i>
-                分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i class="tags icon"></i>标签</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active' "><i
-                    class="clone icon"></i>归档</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active' "><i class="info icon"></i>关于我</a>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active' "><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active' "><i class="idea icon"></i>分类</a>
+            <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i class="tags icon"></i>标签</a>
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active' "><i class="clone icon"></i>归档</a>
+            <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active' "><i class="info icon"></i>关于我</a>
+            <a href="#" th:href="@{/admin}" class="m-item item m-mobile-hide" target="_blank" th:classappend="${n==6} ? 'active'"><i class="mini info icon"></i>后台</a>
             <div class="right m-item item m-mobile-hide">
-                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank"></form>
-                <div class="ui inverted transparent input">
-                    <input type="text" name="query" placeholder="Search..." th:value="${query}">
-                    <i onclick="document.forms['search'].submit()" class="search icon"></i>
-                </div>
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon inverted transparent input m-margin-tb-tiny">
+                        <input type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -87,10 +87,10 @@
     <!--semantic-ui-->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
-    <script src="../static/lib/prism/prism.js" th:src="${lib/prism/prism.js}"></script>
-    <script src="../static/lib/tocbot/tocbot.min.js" th:src="${lib/tocbot/tocbot.min.js}"></script>
-    <script src="../static/lib/qrcode/qrcode.js" th:src=\"${lib/qrcode/qrcode.js}"></script>
-    <script src="../static/lib/waypoint/jquery.waypoints.js" th:src="${lib/waypoint/jquery.waypoints.js}"></script>
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+    <script src="../static/lib/qrcode/qrcode.js" th:src="@{/lib/qrcode/qrcode.js}"></script>
+    <script src="../static/lib/waypoint/jquery.waypoints.js" th:src="@{/lib/waypoint/jquery.waypoints.js}"></script>
 
 </th:block>
 

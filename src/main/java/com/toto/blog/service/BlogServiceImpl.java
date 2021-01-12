@@ -3,6 +3,7 @@ package com.toto.blog.service;
 import com.toto.blog.NotFoundException;
 import com.toto.blog.dao.BlogRepository;
 import com.toto.blog.entity.Blog;
+import com.toto.blog.util.MarkdownUtils;
 import com.toto.blog.vo.BlogQuery;
 import org.hibernate.query.criteria.internal.predicate.BooleanAssertionPredicate;
 import org.springframework.beans.BeanUtils;
@@ -34,6 +35,19 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog getBlog(Long id) {
         return blogRepository.getOne(id);
+    }
+
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog one = blogRepository.getOne(id);
+        if (one == null) {
+            throw new NotFoundException("没有找到");
+        }
+        Blog blog = new Blog();
+        BeanUtils.copyProperties(one, blog);
+        String content = blog.getContent();
+        blog.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return blog;
     }
 
     @Override
