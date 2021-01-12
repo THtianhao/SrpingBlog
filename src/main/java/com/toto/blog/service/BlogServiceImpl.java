@@ -6,6 +6,8 @@ import com.toto.blog.entity.Blog;
 import com.toto.blog.vo.BlogQuery;
 import org.hibernate.query.criteria.internal.predicate.BooleanAssertionPredicate;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,16 +54,39 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
+
+    /**
+     * 获取所有的属性值为空属性名数组
+     *
+     * @param source
+     * @return
+     */
+    public static String[] getNullPropertyNames(Object source) {
+        BeanWrapper beanWrapper = new BeanWrapperImpl(source);
+        PropertyDescriptor[] pds = beanWrapper.getPropertyDescriptors();
+        List<String> nullPropertyNames = new ArrayList<>();
+        for (PropertyDescriptor pd : pds) {
+            String propertyName = pd.getName();
+            if (beanWrapper.getPropertyValue(propertyName) == null) {
+                nullPropertyNames.add(propertyName);
+            }
+        }
+        return nullPropertyNames.toArray(new String[nullPropertyNames.size()]);
+    }
+
     @Override
     public Blog saveBlog(Blog blog) {
         if (blog.getId() == null) {
             blog.setCreateTime(new Date());
             blog.setUpdateTime(new Date());
             blog.setViews(0);
+            return blogRepository.save(blog);
         } else {
+            Blog one = blogRepository.getOne(blog.getId());
+            BeanUtils.copyProperties(blog, one, getNullPropertyNames(blog));
             blog.setUpdateTime(new Date());
+            return blogRepository.save(one);
         }
-        return blogRepository.save(blog);
     }
 
     @Override
