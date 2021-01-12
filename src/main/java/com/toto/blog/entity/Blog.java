@@ -19,6 +19,7 @@ public class Blog {
     private String content;
     private String firstPicture;
     private String flag;
+    private String preview;
     private Integer views = 0;
     private boolean appreciationEnable;
     private boolean shareStatementEnable;
@@ -211,5 +212,13 @@ public class Blog {
 
     public void setTagIds(String tagIds) {
         this.tagIds = tagIds;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 }

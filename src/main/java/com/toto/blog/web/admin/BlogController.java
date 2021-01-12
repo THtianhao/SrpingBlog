@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/admin")
@@ -78,6 +79,10 @@ public class BlogController {
         blog.setUser((User) session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
+        String regEx="[\n\r`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？]";
+        String previewAll = blog.getContent().replaceAll(regEx,"");
+        String des = previewAll.substring(0, 100);
+        blog.setPreview(des);
         Blog blog1 = blogService.saveBlog(blog);
 
         if (blog1 == null) {
