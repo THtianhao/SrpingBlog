@@ -13,12 +13,12 @@
 <!--导航-->
 <!--ui是sematic的组件代码-->
 <!--inverted 是反色的意思-->
-<nav class="ui inverted attached segment m-padded-td-min m-shadow-small">
+<nav th:replace="_fragments :: menu(2)" class="ui inverted attached segment m-padded-td-min m-shadow-small">
     <div class="ui container">
         <div class="ui inverted stackable menu">
             <h2 class="ui teal header item"> Blog</h2>
             <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i> 分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
             <div class="right m-item item m-mobile-hide">
