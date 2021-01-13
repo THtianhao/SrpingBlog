@@ -35,7 +35,7 @@
 
 <body>
 <!--中间内容-->
-<div class="m-padded-td-big m-container">
+<div class="m-padded-td-big m-container animate__animated animate__fadeIn">
     <div class="ui container">
         <div class="ui stackable grid">
             <!--            左边博客内容-->
@@ -73,10 +73,12 @@
                                             </div>
                                             <div class="item">
                                                 <i class="calendar icon"></i>
-                                                <span class="middle aligned" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
+                                                <span class="middle aligned"
+                                                      th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
                                             </div>
                                             <div class="item">
-                                                <i class="eye icon"></i><span class="middle aligned" th:text="${blog.views}"></span>
+                                                <i class="eye icon"></i><span class="middle aligned"
+                                                                              th:text="${blog.views}"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -121,31 +123,22 @@
                                 <i class="idea icon"></i>分类
                             </div>
                             <div class="right aligned column">
-                                <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                <a href="" th:href="@{/types/-1}" target="_blank">more <i
+                                        class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui  teal segment">
                         <div class="ui fluid vertical menu">
-                            <a href="" class="item" th:each="type : ${types}"><span th:text="${type.name}">
+                            <a href="" th:href="@{/types/{id}(id=${type.id})}" class="item"
+                               th:each="type : ${types}"><span th:text="${type.name}">
                                 学习日志
                             </span>
                                 <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">
                                     13
                                 </div>
                             </a>
-                            <!--/*-->
 
-                            <a href="" class="item">学习日志
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <a href="" class="item">学习日志
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <a href="" class="item">学习日志
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <!--*/-->
                         </div>
                     </div>
                 </div>
@@ -157,15 +150,17 @@
                                 <i class="tags icon"></i>标签
                             </div>
                             <div class="right aligned column">
-                                <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                <a href="" th:href="@{/tags/-1}" target="_blank">more <i
+                                        class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui teal segment">
-                        <div class="ui teal basic left pointing label m-margin-td-tiny" th:each="tag : ${tags}">
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"
+                           class="ui teal basic left pointing label m-margin-td-tiny" th:each="tag : ${tags}">
                             <span th:text="${tag.name}">方法论</span>
                             <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
-                        </div>
+                        </a>
                         <!--/*-->
                         <div class="ui teal basic left pointing label m-margin-td-tiny">方法论
                             <div class="detail">23</div>
