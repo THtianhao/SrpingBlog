@@ -3,6 +3,8 @@ spring:
     mode: HTML
   profiles:
     active: debug
+  messages:
+    basename: i18n/messages
 
 
 
