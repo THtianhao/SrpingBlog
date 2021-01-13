@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +20,31 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> listCommentByBlogId(Long blogId) {
         Sort createTime = Sort.by(Sort.Direction.DESC, "createTime");
-        return commentRepository.findByBlogId(blogId, createTime);
+        List<Comment> byBlogId = commentRepository.findByBlogIdAndParentCommentNull(blogId, createTime);
+        eachComment(byBlogId);
+        return byBlogId;
     }
+
+    private List<Comment> eachComment(List<Comment> byBlogId) {
+        for (Comment comment : byBlogId) {
+            List<Comment> childComments = new ArrayList<>();
+            addChild(childComments, comment);
+            comment.setReplyComments(childComments);
+        }
+        return null;
+    }
+
+    private void addChild(List<Comment> childComments, Comment comment) {
+        List<Comment> replyComments = comment.getReplyComments();
+        if (replyComments.size() > 0) {
+            childComments.addAll(replyComments);
+            for (Comment comment1 : replyComments) {
+
+                addChild(childComments, comment1);
+            }
+        }
+    }
+
 
     @Override
     public Comment saveComment(Comment comment) {
