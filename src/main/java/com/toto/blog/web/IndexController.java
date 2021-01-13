@@ -1,5 +1,6 @@
 package com.toto.blog.web;
 
+import com.toto.blog.entity.Blog;
 import com.toto.blog.service.BlogService;
 import com.toto.blog.service.TagService;
 import com.toto.blog.service.TypeService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.management.Query;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -51,5 +53,11 @@ public class IndexController {
     public String blog(@PathVariable Long id, Model model) {
         model.addAttribute("blog", blogService.getAndConvert(id));
         return "/blog";
+    }
+
+    @GetMapping("/footer/newblog")
+    public String newBlogs(Model model) {
+        model.addAttribute("newblogs", blogService.listRecommendBlog(3));
+        return "_fragments :: newblogList";
     }
 }
